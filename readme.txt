@@ -4,9 +4,12 @@ Check status -> docker ps
 Show images -> dcoker images
 
 
-kubectl apply -f application.yaml
-kubectl expose deployment node-docker --type="LoadBalancer"
+kubectl apply -f deploymentservice.yml
+kubectl expose deployment node-docker-deployment --type="LoadBalancer"
+kubectl service node-docker-service
+
 kubectl delete service node-docker
+
 
 kubectl get deployments
 kubectl get pods
