@@ -5,9 +5,7 @@ metadata:
   labels:
     app: nodeapp
 spec:
-  minReplicas: 1
-  maxReplicas: 5
-  targetCPUUtilizationPercentage: 20
+  Replicas: 1
   selector:
     matchLabels:
       app: nodeapp
@@ -38,3 +36,17 @@ spec:
     port: 5000
     targetPort: 3000
     nodePort: 31110
+
+    ---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: node-docker
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: node-docker-deployment
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 50
